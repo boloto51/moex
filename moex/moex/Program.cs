@@ -8,6 +8,7 @@ namespace moex
     {
         static void Main(string[] args)
         {
+            //https://support.microsoft.com/ru-ru/help/307023/how-to-make-a-get-request-by-using-visual-c
             string sURL;
             sURL = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
             WebRequest wrGETURL;

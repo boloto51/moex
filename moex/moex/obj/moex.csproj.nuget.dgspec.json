@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj": {}
+    "c:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj": {}
   },
   "projects": {
-    "C:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj": {
+    "c:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj",
+        "projectUniqueName": "c:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj",
         "projectName": "moex",
-        "projectPath": "C:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj",
+        "projectPath": "c:\\Temp\\GitHub\\moex\\moex\\moex\\moex.csproj",
         "packagesPath": "C:\\Users\\test\\.nuget\\packages\\",
-        "outputPath": "C:\\Temp\\GitHub\\moex\\moex\\moex\\obj\\",
+        "outputPath": "c:\\Temp\\GitHub\\moex\\moex\\moex\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\test\\AppData\\Roaming\\NuGet\\NuGet.Config",
