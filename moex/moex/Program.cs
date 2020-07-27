@@ -2,6 +2,9 @@
 using System.Net;
 using System.IO;
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace moex
 {
     class Program
@@ -17,7 +20,26 @@ namespace moex
             objStream = wrGETURL.GetResponse().GetResponseStream();
             StreamReader objReader = new StreamReader(objStream);
 
+            //string sLine = "";
+            //int i = 0;
+
+            //while (sLine != null)
+            //{
+            //    i++;
+            //    sLine = objReader.ReadLine();
+            //    if (sLine != null)
+            //        Console.WriteLine("{0}:{1}", i, sLine);
+            //}
+            //Console.ReadLine();
+
+
+            //Securities json = JsonSerializer.Deserialize<Securities>(objReader);
+            //Console.WriteLine(json.SHORTNAME);
+            //Console.ReadLine();
+
+
             string sLine = "";
+            string sLineNew = "";
             int i = 0;
 
             while (sLine != null)
@@ -25,8 +47,10 @@ namespace moex
                 i++;
                 sLine = objReader.ReadLine();
                 if (sLine != null)
-                    Console.WriteLine("{0}:{1}", i, sLine);
+                    sLineNew = sLineNew + sLine.Trim();
             }
+
+            Console.WriteLine(sLineNew);
             Console.ReadLine();
         }
     }
