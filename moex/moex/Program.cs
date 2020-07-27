@@ -5,6 +5,9 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace moex
 {
     class Program
@@ -32,12 +35,6 @@ namespace moex
             //}
             //Console.ReadLine();
 
-
-            //Securities json = JsonSerializer.Deserialize<Securities>(objReader);
-            //Console.WriteLine(json.SHORTNAME);
-            //Console.ReadLine();
-
-
             string sLine = "";
             string sLineNew = "";
             int i = 0;
@@ -50,7 +47,10 @@ namespace moex
                     sLineNew = sLineNew + sLine.Trim();
             }
 
-            Console.WriteLine(sLineNew);
+            JObject obj = JObject.Parse(sLineNew);
+            var metadata = obj["history.cursor"].ToString();
+
+            Console.WriteLine(metadata);
             Console.ReadLine();
         }
     }

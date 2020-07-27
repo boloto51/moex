@@ -6,6 +6,28 @@ namespace moex
 {
     public class Securities
     {
+        public string BOARDID { get; set; }
+        public string TRADEDATE { get; set; }
+        public string SHORTNAME { get; set; }
+        public string SECID { get; set; }
+        public string NUMTRADES { get; set; }
+        public string VALUE { get; set; }
+        public string OPEN { get; set; }
+        public string LOW { get; set; }
+        public string HIGH { get; set; }
+        public string LEGALCLOSEPRICE { get; set; }
+        public string WAPRICE { get; set; }
+        public string CLOSE { get; set; }
+        public string VOLUME { get; set; }
+        public string MARKETPRICE2 { get; set; }
+        public string MARKETPRICE3 { get; set; }
+        public string ADMITTEDQUOTE { get; set; }
+        public string MP2VALTRD { get; set; }
+        public string MARKETPRICE3TRADESVALUE { get; set; }
+        public string ADMITTEDVALUE { get; set; }
+        public string WAVAL { get; set; }
+        public string TRADINGSESSION { get; set; }
+
         //public string BOARDID { get; set; }
         //public DateTime TRADEDATE { get; set; }
         //public string SHORTNAME { get; set; }

@@ -9,3 +9,5 @@ C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.AssemblyInfoInputs.ca
 C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.AssemblyInfo.cs
 C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.dll
 C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.pdb
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+c:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.csproj.CopyComplete
