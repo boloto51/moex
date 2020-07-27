@@ -1,0 +1,11 @@
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.exe
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.deps.json
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.runtimeconfig.json
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.runtimeconfig.dev.json
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.dll
+C:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\moex.pdb
+C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.csprojAssemblyReference.cache
+C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.AssemblyInfoInputs.cache
+C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.AssemblyInfo.cs
+C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.dll
+C:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.pdb
