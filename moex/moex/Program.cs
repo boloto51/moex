@@ -6,8 +6,10 @@ using moex.JSON_class;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-//using Newtonsoft.Json;
-//using Newtonsoft.Json.Linq;
+using System.Linq;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using moex.DbContext;
 
 namespace moex
 {
@@ -15,7 +17,6 @@ namespace moex
     {
         static void Main(string[] args)
         {
-            //https://support.microsoft.com/ru-ru/help/307023/how-to-make-a-get-request-by-using-visual-c
             string sURL;
             sURL = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
             WebRequest wrGETURL;
@@ -38,9 +39,19 @@ namespace moex
 
             Root obj = JsonSerializer.Deserialize<Root>(sLineNew);
 
-            foreach (var row in obj.history.data)
+            using (var _context = new DataContext())
             {
-                Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
+                foreach (var row in obj.history.data)
+                {
+                    Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
+
+                    _context.Securities.Add(new Security
+                    {
+                        SecId = row.ToArray()[3].ToString(),
+                        ShortName = row.ToArray()[2].ToString()
+                    });
+                    _context.SaveChanges();
+                }
             }
 
             Console.ReadLine();
