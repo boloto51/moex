@@ -10,6 +10,7 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using moex.DbContext;
+using moex.Models;
 
 namespace moex
 {
