@@ -24,18 +24,6 @@ namespace moex
             objStream = wrGETURL.GetResponse().GetResponseStream();
             StreamReader objReader = new StreamReader(objStream);
 
-            //string sLine = "";
-            //int i = 0;
-
-            //while (sLine != null)
-            //{
-            //    i++;
-            //    sLine = objReader.ReadLine();
-            //    if (sLine != null)
-            //        Console.WriteLine("{0}:{1}", i, sLine);
-            //}
-            //Console.ReadLine();
-
             string sLine = "";
             string sLineNew = "";
             int i = 0;
@@ -55,7 +43,6 @@ namespace moex
                 Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
             }
 
-            //Console.WriteLine(obj.history.data.ToString());
             Console.ReadLine();
         }
     }
