@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.IO;
+using moex.JSON_class;
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -47,10 +48,12 @@ namespace moex
                     sLineNew = sLineNew + sLine.Trim();
             }
 
-            JObject obj = JObject.Parse(sLineNew);
-            var metadata = obj["history.cursor"].ToString();
+            //JObject obj = JObject.Parse(sLineNew);
+            //var metadata = obj["history.cursor"].ToString();
 
-            Console.WriteLine(metadata);
+            Root obj = JsonConvert.DeserializeObject<Root>(sLineNew);
+
+            Console.WriteLine(obj.history.metadata.ToString());
             Console.ReadLine();
         }
     }
