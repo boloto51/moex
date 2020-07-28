@@ -48,12 +48,14 @@ namespace moex
                     sLineNew = sLineNew + sLine.Trim();
             }
 
-            //JObject obj = JObject.Parse(sLineNew);
-            //var metadata = obj["history.cursor"].ToString();
-
             Root obj = JsonConvert.DeserializeObject<Root>(sLineNew);
 
-            Console.WriteLine(obj.history.metadata.ToString());
+            foreach (var row in obj.history.data)
+            {
+                Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
+            }
+
+            //Console.WriteLine(obj.history.data.ToString());
             Console.ReadLine();
         }
     }

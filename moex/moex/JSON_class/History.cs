@@ -8,6 +8,6 @@ namespace moex.JSON_class
     {
         public Metadata metadata { get; set; }
         public List<string> columns { get; set; }
-        public List<object> data { get; set; }
+        public List<List<object>> data { get; set; }
     }
 }
