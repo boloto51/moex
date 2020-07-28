@@ -44,3 +44,8 @@ c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreap
 c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 c:\Temp\GitHub\moex\moex\moex\obj\Debug\netcoreapp3.1\moex.csproj.CopyComplete
 c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\appsettings.json
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll

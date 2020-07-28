@@ -28,7 +28,25 @@ namespace moex.DbContext
         //    //optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         //    optionsBuilder.UseSqlServer(@"Server = localhost; Database = moexdb; Uid = root; Pwd = Aa12345;");
         //}
-        private const string connectionString = "Server=localhost;Database=moexdb; Uid = root; Pwd = Aa12345;";
+        //private const string connectionString = "user id=root;password=Aa12345;data source=localhost;port=3306;initial catalog=moexdb;charset=utf8;";
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
+        private string connectionString;
+
+        public DataContext() : base()
+        {
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json", optional: false);
+
+            var configuration = builder.Build();
+
+            connectionString = configuration.GetConnectionString("DataContext").ToString();
+
+        }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
