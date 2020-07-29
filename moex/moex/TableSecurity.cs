@@ -2,9 +2,7 @@
 using moex.JSON_class;
 using moex.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 namespace moex
@@ -41,7 +39,6 @@ namespace moex
                     }
                 }
             }
-
             Console.ReadLine();
         }
     }

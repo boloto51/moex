@@ -4,7 +4,6 @@ using moex.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 namespace moex
@@ -13,11 +12,8 @@ namespace moex
     {
         public void FillingDB(List<Security> secList, string Url_Security, string Url_Security_Postfix)
         {
-
-
             foreach (var secItem in secList)
             {
-                //var _secId = _context.Securities.Where(b => b.SecId == secId).Select(b => b.Id).FirstOrDefault();
                 var secId = secItem.SecId;
                 var _secId = secItem.Id;
 

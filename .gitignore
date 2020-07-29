@@ -1,0 +1,7 @@
+.vs
+.dtbcache
+.suo
+storage.ide
+storage.ide-shm
+storage.ide-wal
+*.cache
