@@ -11,9 +11,9 @@ namespace moex.Models
         [Column("Id")]
         public int Id { get; set; }
         [Column("BOARDID")]
-        public string? BOARDID { get; set; }
+        public string BOARDID { get; set; }
         [Column("TradeDate")]
-        public string? TradeDate { get; set; }
+        public string TradeDate { get; set; }
         [Column("SecId")]
         public int SecId { get; set; }
         [Column("OPEN")]
@@ -22,13 +22,11 @@ namespace moex.Models
         public decimal? LOW { get; set; }
         [Column("HIGH")]
         public decimal? HIGH { get; set; }
-        [Column("LEGALCLOSEPRICE ")]
-        public decimal? LEGALCLOSEPRICE { get; set; }
         [Column("WAPRICE")]
         public decimal? WAPRICE { get; set; }
         [Column("CLOSE")]
         public decimal? CLOSE { get; set; }
 
-        public virtual Security Security { get; set; }
+        //public virtual Security Security { get; set; }
     }
 }

@@ -11,9 +11,9 @@ namespace moex
 {
     public class TableTrade
     {
-        public void FillingDB(DataContext _context, string Url_Security, string Url_Security_Postfix)
+        public void FillingDB(List<Security> secList, string Url_Security, string Url_Security_Postfix)
         {
-            var secList = _context.Securities.Select(a => a);
+
 
             foreach (var secItem in secList)
             {
@@ -37,10 +37,12 @@ namespace moex
                     foreach (var entry in obj.history.data)
                     {
                         Console.WriteLine("BOARDID: {0}\tTRADEDATE: {1}\tSECID: {2}\tOPEN: {3}\t" +
-                            "LOW: {4}\tHIGH: {5}\tLEGALCLOSEPRICE: {6}\tWAPRICE: {7}\tCLOSE: {8}",
+                            "LOW: {4}\tHIGH: {5}\tWAPRICE: {6}\tCLOSE: {7}",
                             entry.ToArray()[0], entry.ToArray()[1], secId, 
                             entry.ToArray()[6], entry.ToArray()[7], entry.ToArray()[8], 
-                            entry.ToArray()[9], entry.ToArray()[10], entry.ToArray()[11]);
+                            entry.ToArray()[10], entry.ToArray()[11]);
+
+                        DataContext _context = new DataContext();
 
                         var isDate = _context.Trades.Select(a => a.TradeDate.ToString() == entry.ToArray()[1].ToString()) != null;
                         var isBoard = _context.Trades.Select(a => a.BOARDID.ToString() == entry.ToArray()[0].ToString()) != null;
@@ -50,19 +52,21 @@ namespace moex
                         {
                             _context.Trades.Add(new Trade
                             {
-                                BOARDID = String.IsNullOrEmpty(entry.ToArray()[0].ToString()) ? "" : entry.ToArray()[0].ToString(),
-                                TradeDate = String.IsNullOrEmpty(entry.ToArray()[1].ToString()) ? "" : entry.ToArray()[1].ToString(),
+                                BOARDID = entry.ToArray()[0].ToString(),
+                                TradeDate = entry.ToArray()[1].ToString(),
                                 SecId = _secId,
-                                OPEN = String.IsNullOrEmpty(entry.ToArray()[6].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[6]),
-                                LOW = String.IsNullOrEmpty(entry.ToArray()[7].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[7]),
-                                HIGH = String.IsNullOrEmpty(entry.ToArray()[8].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[8]),
-                                LEGALCLOSEPRICE = String.IsNullOrEmpty(entry.ToArray()[9].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[9]),
-                                WAPRICE = String.IsNullOrEmpty(entry.ToArray()[10].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[10]),
-                                CLOSE = String.IsNullOrEmpty(entry.ToArray()[11].ToString()) ? -1 : Convert.ToDecimal(entry.ToArray()[11])
+                                OPEN = Convert.ToDecimal(entry.ToArray()[6].ToString()),
+                                LOW = Convert.ToDecimal(entry.ToArray()[7].ToString()),
+                                HIGH = Convert.ToDecimal(entry.ToArray()[8].ToString()),
+                                WAPRICE = Convert.ToDecimal(entry.ToArray()[10].ToString()),
+                                CLOSE = Convert.ToDecimal(entry.ToArray()[11].ToString())
                             });
                             _context.SaveChanges();
                         }
+                        //_context.SaveChanges();
                     }
+
+                    //_context.SaveChanges();
                 }
 
                 //Console.ReadLine();
