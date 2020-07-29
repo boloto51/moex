@@ -18,40 +18,32 @@ namespace moex
     {
         static void Main(string[] args)
         {
-            string sURL;
-            sURL = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
-            WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(sURL);
-            Stream objStream;
-            objStream = wrGETURL.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(objStream);
+            DataContext _context = new DataContext();
 
-            string sLine = "";
-            string sLineNew = "";
-            int i = 0;
+            //Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
+            string Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/securities.json";
+            string Url_Security_Postfix = "?start=";
 
-            while (sLine != null)
+            for (int i = 0; i < 5; i++)
             {
-                i++;
-                sLine = objReader.ReadLine();
-                if (sLine != null)
-                    sLineNew = sLineNew + sLine.Trim();
-            }
+                var objReader = new StreamReaderFromUrl().Read(i, Url_Security, Url_Security_Postfix);
+                var sLineTotal = new JsonCreator().Create(objReader);
 
-            Root obj = JsonSerializer.Deserialize<Root>(sLineNew);
+                Root obj = JsonSerializer.Deserialize<Root>(sLineTotal);
 
-            using (var _context = new DataContext())
-            {
                 foreach (var row in obj.history.data)
                 {
                     Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
 
-                    _context.Securities.Add(new Security
+                    if (_context.Securities.Select(a => a.SecId == row.ToArray()[3].ToString()) != null)
                     {
-                        SecId = row.ToArray()[3].ToString(),
-                        ShortName = row.ToArray()[2].ToString()
-                    });
-                    _context.SaveChanges();
+                        _context.Securities.Add(new Security
+                        {
+                            SecId = row.ToArray()[3].ToString(),
+                            ShortName = row.ToArray()[2].ToString()
+                        });
+                        _context.SaveChanges();
+                    }                    
                 }
             }
 
