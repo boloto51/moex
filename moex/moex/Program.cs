@@ -18,42 +18,19 @@ namespace moex
     {
         static void Main(string[] args)
         {
-            string sURL;
-            sURL = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
-            WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(sURL);
-            Stream objStream;
-            objStream = wrGETURL.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(objStream);
+            //DataContext _context = new DataContext();
 
-            string sLine = "";
-            string sLineNew = "";
-            int i = 0;
+            //Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
+            string Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/securities";
+            string Url_Security_Postfix = "?start=";
 
-            while (sLine != null)
-            {
-                i++;
-                sLine = objReader.ReadLine();
-                if (sLine != null)
-                    sLineNew = sLineNew + sLine.Trim();
-            }
+            //new TableSecurity().FillingDB(_context, Url_Security, Url_Security_Postfix);
 
-            Root obj = JsonSerializer.Deserialize<Root>(sLineNew);
+            DataContext _context = new DataContext();
 
-            using (var _context = new DataContext())
-            {
-                foreach (var row in obj.history.data)
-                {
-                    Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", row.ToArray()[3], row.ToArray()[2]);
+            var secList = _context.Securities.Select(a => a).ToList();
 
-                    _context.Securities.Add(new Security
-                    {
-                        SecId = row.ToArray()[3].ToString(),
-                        ShortName = row.ToArray()[2].ToString()
-                    });
-                    _context.SaveChanges();
-                }
-            }
+            new TableTrade().FillingDB(secList, Url_Security, Url_Security_Postfix);
 
             Console.ReadLine();
         }
