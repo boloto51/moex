@@ -17,7 +17,6 @@ namespace moex.DbContext
         //{
         //}
 
-        public DbSet<Security> Securities { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -43,14 +42,17 @@ namespace moex.DbContext
 
             var configuration = builder.Build();
 
-            connectionString = configuration.GetConnectionString("DataContext").ToString();
+            connectionString = configuration.GetConnectionString("DefaultConnection").ToString();
 
         }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseMySql(connectionString);
         }
+
+        public DbSet<Security> Securities { get; set; }
+
     }
 }

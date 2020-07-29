@@ -49,3 +49,7 @@ c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileP
 c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
 c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
+c:\Temp\GitHub\moex\moex\moex\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
