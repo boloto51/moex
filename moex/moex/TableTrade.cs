@@ -44,32 +44,27 @@ namespace moex
 
                         DataContext _context = new DataContext();
 
-                        var isDate = _context.Trades.Select(a => a.TradeDate.ToString() == entry.ToArray()[1].ToString()) != null;
-                        var isBoard = _context.Trades.Select(a => a.BOARDID.ToString() == entry.ToArray()[0].ToString()) != null;
-                        var isSecId = _context.Trades.Select(a => a.SecId == _secId) != null;
+                        var isBoard = _context.Trades.Select(a => a.BOARDID.ToString() == entry.ToArray()[0].ToString());
+                        var isDate = _context.Trades.Select(a => a.TradeDate.ToString() == entry.ToArray()[1].ToString());
+                        var isSecId = _context.Trades.Select(a => a.SecId == _secId);
 
-                        if (isDate && isSecId && isBoard)
+                        if ((isDate == null) && (isSecId == null) && (isBoard == null))
                         {
                             _context.Trades.Add(new Trade
                             {
-                                BOARDID = entry.ToArray()[0].ToString(),
-                                TradeDate = entry.ToArray()[1].ToString(),
+                                BOARDID = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[0].ToString(),
+                                TradeDate = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[1].ToString(),
                                 SecId = _secId,
-                                OPEN = Convert.ToDecimal(entry.ToArray()[6].ToString()),
-                                LOW = Convert.ToDecimal(entry.ToArray()[7].ToString()),
-                                HIGH = Convert.ToDecimal(entry.ToArray()[8].ToString()),
-                                WAPRICE = Convert.ToDecimal(entry.ToArray()[10].ToString()),
-                                CLOSE = Convert.ToDecimal(entry.ToArray()[11].ToString())
+                                OPEN = String.IsNullOrEmpty(entry.ToList()[6].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToList()[6].ToString()),
+                                LOW = String.IsNullOrEmpty(entry.ToList()[7].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[7].ToString()),
+                                HIGH = String.IsNullOrEmpty(entry.ToList()[8].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[8].ToString()),
+                                WAPRICE = String.IsNullOrEmpty(entry.ToList()[10].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[10].ToString()),
+                                CLOSE = String.IsNullOrEmpty(entry.ToList()[11].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[11].ToString())
                             });
                             _context.SaveChanges();
                         }
-                        //_context.SaveChanges();
                     }
-
-                    //_context.SaveChanges();
                 }
-
-                //Console.ReadLine();
             }
         }
     }
