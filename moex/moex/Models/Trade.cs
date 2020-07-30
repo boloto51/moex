@@ -14,18 +14,22 @@ namespace moex.Models
         public string BOARDID { get; set; }
         [Column("TradeDate")]
         public string TradeDate { get; set; }
+        [Column("SHORTNAME")]
+        public string SHORTNAME { get; set; }
+        [Column("SECIDstr")]
+        public string SECIDstr { get; set; }
         [Column("SecId")]
-        public int SecId { get; set; }
+        public int? SecId { get; set; }
         [Column("OPEN")]
-        public decimal? OPEN { get; set; }
+        public string OPEN { get; set; }
         [Column("LOW")]
-        public decimal? LOW { get; set; }
+        public string LOW { get; set; }
         [Column("HIGH")]
-        public decimal? HIGH { get; set; }
+        public string HIGH { get; set; }
         [Column("WAPRICE")]
-        public decimal? WAPRICE { get; set; }
+        public string WAPRICE { get; set; }
         [Column("CLOSE")]
-        public decimal? CLOSE { get; set; }
+        public string CLOSE { get; set; }
 
         //public virtual Security Security { get; set; }
     }

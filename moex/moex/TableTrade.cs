@@ -40,25 +40,40 @@ namespace moex
 
                         DataContext _context = new DataContext();
 
-                        var isBoard = _context.Trades.Select(a => a.BOARDID.ToString() == entry.ToArray()[0].ToString());
-                        var isDate = _context.Trades.Select(a => a.TradeDate.ToString() == entry.ToArray()[1].ToString());
-                        var isSecId = _context.Trades.Select(a => a.SecId == _secId);
+                        //var isBoard = _context.Trades.Select(a => a.BOARDID.ToString() == entry.ToArray()[0].ToString());
+                        //var isDate = _context.Trades.Select(a => a.TradeDate.ToString() == entry.ToArray()[1].ToString());
+                        //var isSecId = _context.Trades.Select(a => a.SecId == _secId);
 
-                        if ((isDate == null) && (isSecId == null) && (isBoard == null))
+                        //if ((isDate == null) && (isSecId == null) && (isBoard == null))
+                        //if (!String.IsNullOrEmpty(entry.ToString()))
+                        //{
+                        //_context.Trades.Add(new Trade
+                        //{
+                        //    BOARDID = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[0].ToString(),
+                        //    TradeDate = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[1].ToString(),
+                        //    SecId = _secId,
+                        //    OPEN = String.IsNullOrEmpty(entry.ToList()[6].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToList()[6].ToString()),
+                        //    LOW = String.IsNullOrEmpty(entry.ToList()[7].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[7].ToString()),
+                        //    HIGH = String.IsNullOrEmpty(entry.ToList()[8].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[8].ToString()),
+                        //    WAPRICE = String.IsNullOrEmpty(entry.ToList()[10].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[10].ToString()),
+                        //    CLOSE = String.IsNullOrEmpty(entry.ToList()[11].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[11].ToString())
+                        //});
+                        //_context.SaveChanges();
+                        //}
+                        _context.Trades.Add(new Trade
                         {
-                            _context.Trades.Add(new Trade
-                            {
-                                BOARDID = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[0].ToString(),
-                                TradeDate = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToArray()[1].ToString(),
-                                SecId = _secId,
-                                OPEN = String.IsNullOrEmpty(entry.ToList()[6].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToList()[6].ToString()),
-                                LOW = String.IsNullOrEmpty(entry.ToList()[7].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[7].ToString()),
-                                HIGH = String.IsNullOrEmpty(entry.ToList()[8].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[8].ToString()),
-                                WAPRICE = String.IsNullOrEmpty(entry.ToList()[10].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[10].ToString()),
-                                CLOSE = String.IsNullOrEmpty(entry.ToList()[11].ToString()) ? (decimal?)null : Convert.ToDecimal(entry.ToArray()[11].ToString())
-                            });
-                            _context.SaveChanges();
-                        }
+                            BOARDID = String.IsNullOrEmpty(entry.ToList()[0].ToString()) ? null : entry.ToList()[0].ToString(),
+                            TradeDate = String.IsNullOrEmpty(entry.ToList()[1].ToString()) ? null : entry.ToList()[1].ToString(),
+                            SHORTNAME = String.IsNullOrEmpty(entry.ToList()[2].ToString()) ? null : entry.ToList()[2].ToString(),
+                            SECIDstr = String.IsNullOrEmpty(entry.ToList()[3].ToString()) ? null : entry.ToList()[3].ToString(),
+                            SecId = _secId,
+                            OPEN = String.IsNullOrEmpty(entry.ToList()[6].ToString()) ? null : entry.ToList()[6].ToString(),
+                            LOW = String.IsNullOrEmpty(entry.ToList()[7].ToString()) ? null : entry.ToList()[7].ToString(),
+                            HIGH = String.IsNullOrEmpty(entry.ToList()[8].ToString()) ? null : entry.ToList()[8].ToString(),
+                            WAPRICE = String.IsNullOrEmpty(entry.ToList()[10].ToString()) ? null : entry.ToList()[10].ToString(),
+                            CLOSE = String.IsNullOrEmpty(entry.ToList()[11].ToString()) ? null : entry.ToList()[11].ToString()
+                        });
+                        _context.SaveChanges();
                     }
                 }
             }
