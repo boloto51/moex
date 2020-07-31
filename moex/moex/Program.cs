@@ -17,7 +17,14 @@ namespace moex
             //new TableSecurity().FillingDB(_context, Url_Security, Url_Security_Postfix);
 
             var secList = _context.Securities.Select(a => a).ToList();
-            new TableTrade().FillingDB(secList, Url_Security, Url_Security_Postfix);
+
+            TableTrade tradeTable = new TableTrade();
+
+            foreach (var secItem in secList)
+            {
+                tradeTable.FillingDBAsync(secItem, Url_Security, Url_Security_Postfix);
+            }
+
             Console.ReadLine();
         }
     }

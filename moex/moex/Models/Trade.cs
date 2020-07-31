@@ -30,6 +30,8 @@ namespace moex.Models
         public string WAPRICE { get; set; }
         [Column("CLOSE")]
         public string CLOSE { get; set; }
+        [Column("URL")]
+        public string URL { get; set; }
 
         //public virtual Security Security { get; set; }
     }
