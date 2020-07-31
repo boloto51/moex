@@ -22,7 +22,8 @@ namespace moex
 
             foreach (var secItem in secList)
             {
-                tradeTable.FillingDBAsync(secItem, Url_Security, Url_Security_Postfix);
+                //tradeTable.FillingDBAsync(secItem, Url_Security, Url_Security_Postfix);
+                tradeTable.FillingDB(secItem, Url_Security, Url_Security_Postfix);
             }
 
             Console.ReadLine();
