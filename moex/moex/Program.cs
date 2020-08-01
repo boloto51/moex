@@ -13,7 +13,7 @@ namespace moex
 
             //Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
             //string Url_Security = "http://iss.moex.com/iss/history/engines/stock/markets/shares/securities";
-            string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
+            string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities.json";
             string postfix_start = "?start=";
 
             //new TableSecurity().FillingDB(_context, Url_Security, Url_Security_Postfix);
@@ -35,7 +35,7 @@ namespace moex
                 //var root =  await Task.Run(() => uri.Deserialize(url_init, postfix_start, i));
                 //await Task.Run(() => uri.GetParsingData(root));
                 var root = jsonCreator.Deserialize(url_init, postfix_start, i);
-                jsonCreator.GetParsingData(root);
+                jsonCreator.WritingToSecurityTable(root);
             }
 
 

@@ -38,7 +38,7 @@ namespace moex
             return JsonSerializer.Deserialize<Root>(sLineTotal);
         }
 
-        public void GetParsingData(Root root)
+        public void WritingToSecurityTable(Root root)
         {
             DataContext _context = new DataContext();
 

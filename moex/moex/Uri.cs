@@ -16,17 +16,17 @@ namespace moex
 
         public StreamReader GetStreamFromUrl(string url)
         {
-            //var httpClient = new HttpClient();
-            //httpClient.Timeout = TimeSpan.FromSeconds(30);
-            //var httpGet = httpClient.GetAsync(url);
-            //var stream = httpGet.Result.Content.ReadAsStreamAsync();
-            //StreamReader objReader = new StreamReader(stream.Result);
-            //return objReader;
-            WebRequest wrGETURL = WebRequest.Create(url);
-            wrGETURL.Timeout = 30000;
-            Stream objStream = wrGETURL.GetResponse().GetResponseStream();
-            StreamReader objReader = new StreamReader(objStream);
+            var httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromSeconds(30);
+            var httpGet = httpClient.GetAsync(url);
+            var stream = httpGet.Result.Content.ReadAsStreamAsync();
+            StreamReader objReader = new StreamReader(stream.Result);
             return objReader;
+            //WebRequest wrGETURL = WebRequest.Create(url);
+            //wrGETURL.Timeout = 30000;
+            //Stream objStream = wrGETURL.GetResponse().GetResponseStream();
+            //StreamReader objReader = new StreamReader(objStream);
+            //return objReader;
         }
 
         public int GetCountHundredsPages(StreamReader streamReader)
