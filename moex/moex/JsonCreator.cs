@@ -46,7 +46,8 @@ namespace moex
             {
                 Console.WriteLine("SECID: {0}\tSHORTNAME: {1}", item.ToArray()[3], item.ToArray()[2]);
 
-                if (_context.Securities.Select(a => a.SecId == item.ToArray()[3].ToString()) != null)
+                if (_context.Securities.Where(a => a.SecId == item.ToArray()[3].ToString())
+                    .Select(a => a.SecId).FirstOrDefault() == null)
                 {
                     _context.Securities.Add(new Security
                     {

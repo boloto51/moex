@@ -3,7 +3,6 @@ using System.IO;
 using System.Net.Http;
 using moex.JSON_class;
 using System.Text.Json;
-using System.Net;
 
 namespace moex
 {
@@ -22,11 +21,6 @@ namespace moex
             var stream = httpGet.Result.Content.ReadAsStreamAsync();
             StreamReader objReader = new StreamReader(stream.Result);
             return objReader;
-            //WebRequest wrGETURL = WebRequest.Create(url);
-            //wrGETURL.Timeout = 30000;
-            //Stream objStream = wrGETURL.GetResponse().GetResponseStream();
-            //StreamReader objReader = new StreamReader(objStream);
-            //return objReader;
         }
 
         public int GetCountHundredsPages(StreamReader streamReader)
