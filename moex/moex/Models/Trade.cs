@@ -10,29 +10,11 @@ namespace moex.Models
     {
         [Column("Id")]
         public int Id { get; set; }
-        [Column("BOARDID")]
-        public string BOARDID { get; set; }
         [Column("TradeDate")]
-        public string TradeDate { get; set; }
-        [Column("SHORTNAME")]
-        public string SHORTNAME { get; set; }
-        [Column("SECIDstr")]
-        public string SECIDstr { get; set; }
+        public DateTime TradeDate { get; set; }
         [Column("SecId")]
         public int? SecId { get; set; }
-        [Column("OPEN")]
-        public string OPEN { get; set; }
-        [Column("LOW")]
-        public string LOW { get; set; }
-        [Column("HIGH")]
-        public string HIGH { get; set; }
-        [Column("WAPRICE")]
-        public string WAPRICE { get; set; }
         [Column("CLOSE")]
-        public string CLOSE { get; set; }
-        [Column("URL")]
-        public string URL { get; set; }
-
-        //public virtual Security Security { get; set; }
+        public decimal? CLOSE { get; set; }
     }
 }
