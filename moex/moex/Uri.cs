@@ -8,9 +8,9 @@ namespace moex
 {
     public class Uri
     {
-        public string ConcatenateUrl(string url, string postfix, int i = 0)
+        public string ConcatenateUrl(string url, string json, string postfix, int i = 0)
         {
-            return (url + postfix + Convert.ToString(i * 100));
+            return (url + json + postfix + Convert.ToString(i * 100));
         }
 
         public StreamReader GetStreamFromUrl(string url)
