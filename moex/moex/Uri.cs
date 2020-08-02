@@ -13,9 +13,9 @@ namespace moex
             return (url + json + postfix + Convert.ToString(i * 100));
         }
 
-        public string ConcatenateUrlFrom(string url, string secId, string json, string postfix, string data)
+        public string ConcatenateUrlFrom(string url, string secId, string json, string postfix, string date)
         {
-            return (url + "/" + secId + json + postfix + data);
+            return (url + "/" + secId + json + postfix + date);
         }
 
         public StreamReader GetStreamFromUrl(string url)

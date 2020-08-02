@@ -12,8 +12,10 @@ namespace moex.Models
         public int Id { get; set; }
         [Column("TradeDate")]
         public DateTime TradeDate { get; set; }
-        [Column("SecId")]
-        public int? SecId { get; set; }
+        [Column("SECIDstr")]
+        public string SECIDstr { get; set; }
+        [Column("SECID")]
+        public int SECID { get; set; }
         [Column("CLOSE")]
         public decimal? CLOSE { get; set; }
     }

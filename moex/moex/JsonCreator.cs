@@ -14,5 +14,14 @@ namespace moex
             var sLineTotal = uri.PageContentFromStream(streamReader);
             return JsonSerializer.Deserialize<Root>(sLineTotal);
         }
+
+        public Root Deserialize(string url, string secId, string json, string postfix, string date)
+        {
+            Uri uri = new Uri();
+            var url_param = uri.ConcatenateUrlFrom(url, secId, json, postfix, date);
+            var streamReader = uri.GetStreamFromUrl(url_param);
+            var sLineTotal = uri.PageContentFromStream(streamReader);
+            return JsonSerializer.Deserialize<Root>(sLineTotal);
+        }
     }
 }
