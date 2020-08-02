@@ -1,7 +1,4 @@
-﻿using moex.DbContext;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace moex
 {
@@ -11,19 +8,19 @@ namespace moex
         {
             Uri uri = new Uri();
             JsonCreator jsonCreator = new JsonCreator();
-            DataBase dataBase = new DataBase();
+            DataBasePost dataBasePost = new DataBasePost();
 
             string postfix_json = ".json";
             string postfix_start = "?start=";
 
-            var url_postfix = uri.ConcatenateUrl(url_init, postfix_json, postfix_start);
+            var url_postfix = uri.ConcatenateUrlStart(url_init, postfix_json, postfix_start);
             var streamReader = uri.GetStreamFromUrl(url_postfix);
             var countHundredsPages = uri.GetCountHundredsPages(streamReader);
 
             for (int i = 0; i <= countHundredsPages; i++)
             {
                 var root = jsonCreator.Deserialize(url_init, postfix_json, postfix_start, i);
-                dataBase.WritingToSecurityTable(root);
+                dataBasePost.ToSecurityTableAsync(root);
             }
 
             Console.ReadLine();

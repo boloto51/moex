@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace moex
 {
-    public class DataBase
+    public class DataBasePost
     {
-        public async void WritingToSecurityTable(Root root)
+        public async void ToSecurityTableAsync(Root root)
         {
-            await Task.Run(() => WritingToSecurityTableAsync(root));
+            await Task.Run(() => ToSecurityTable(root));
         }
 
-        public void WritingToSecurityTableAsync(Root root)
+        public void ToSecurityTable(Root root)
         {
             DataContext _context = new DataContext();
 

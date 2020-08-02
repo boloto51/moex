@@ -8,9 +8,14 @@ namespace moex
 {
     public class Uri
     {
-        public string ConcatenateUrl(string url, string json, string postfix, int i = 0)
+        public string ConcatenateUrlStart(string url, string json, string postfix, int i = 0)
         {
             return (url + json + postfix + Convert.ToString(i * 100));
+        }
+
+        public string ConcatenateUrlFrom(string url, string secId, string json, string postfix, string data)
+        {
+            return (url + "/" + secId + json + postfix + data);
         }
 
         public StreamReader GetStreamFromUrl(string url)
@@ -26,8 +31,8 @@ namespace moex
         public int GetCountHundredsPages(StreamReader streamReader)
         {
             var sLineTotal = PageContentFromStream(streamReader);
-            Root obj = JsonSerializer.Deserialize<Root>(sLineTotal);
-            return (int)Math.Truncate(Convert.ToDecimal(obj.history_cursor.data[0][1] / 100));
+            Root root = JsonSerializer.Deserialize<Root>(sLineTotal);
+            return (int)Math.Truncate(Convert.ToDecimal(root.history_cursor.data[0][1] / 100));
         }
 
         public string PageContentFromStream(StreamReader objReader)
@@ -45,6 +50,14 @@ namespace moex
             }
 
             return sLineTotal;
+        }
+
+        public DateTime GetPageLastData(StreamReader streamReader)
+        {
+            var sLineTotal = PageContentFromStream(streamReader);
+            Root root = JsonSerializer.Deserialize<Root>(sLineTotal);
+            var count = root.history.data.Count;
+            return DateTime.Parse(root.history.data[count - 1][1].ToString());
         }
     }
 }
