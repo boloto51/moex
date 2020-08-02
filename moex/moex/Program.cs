@@ -9,8 +9,11 @@ namespace moex
         {
             string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
 
-            TableSecurity tableSecurity = new TableSecurity();
-            tableSecurity.Fill(url_init);
+            //TableSecurity tableSecurity = new TableSecurity();
+            //tableSecurity.Fill(url_init);
+
+            TableTrade tableTrade = new TableTrade();
+            tableTrade.FillAsync(url_init);
         }
     }
 }
