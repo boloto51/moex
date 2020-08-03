@@ -47,16 +47,8 @@ namespace moex
 
             foreach (var item in root.history.data)
             {
-                //Console.WriteLine("TRADEDATE: {0}\tSECID: {1}\tCLOSE: {2}",
-                //    item.ToArray()[1], item.ToArray()[3], item.ToArray()[11]);
-
-                //var secId = _context.Securities.Where(a => a.SECID == item.ToArray()[3].ToString())
-                //    .Select(a => a.Id).FirstOrDefault();
-
                 var close = item[11] as string;
 
-                //if (_context.Trades.Where(a => a.SECID == secId).Select(a => a.Id).FirstOrDefault() == null)
-                //{
                 _context.Trades.Add(new Trade
                 {
                     TRADEDATE = DateTime.Parse(item[1].ToString()).Date,
@@ -64,12 +56,6 @@ namespace moex
                     CLOSE = String.IsNullOrWhiteSpace(close) ?
                         (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
                 });
-
-                //Console.WriteLine("TRADEDATE: {0}\tSECIDstr: {1}\tSECID: {2}\tCLOSE: {3}",
-                //    DateTime.Parse(item.ToArray()[1].ToString()), item.ToArray()[3].ToString(), secId, String.IsNullOrEmpty(item.ToList()[11].ToString()) ?
-                //        (decimal?)null : Convert.ToDecimal(item.ToArray()[11].ToString()));
-
-                //}
             }
             _context.SaveChanges();
         }

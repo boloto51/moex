@@ -57,7 +57,7 @@ namespace moex
             var sLineTotal = PageContentFromStream(streamReader);
             Root root = JsonSerializer.Deserialize<Root>(sLineTotal);
             var count = root.history.data.Count;
-            return DateTime.Parse(root.history.data[count - 1][1].ToString());
+            return DateTime.Parse(root.history.data[count == 0 ? 0 : count- 1][1].ToString());
         }
     }
 }

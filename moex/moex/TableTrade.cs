@@ -29,8 +29,9 @@ namespace moex
         public async void StartFromFirstPage(string url_init, string secId, string postfix_json, string postfix_from, string postfix_date_init)
         {
             var date = postfix_date_init;
+            var dateEnd = "2015-07-31";
 
-            while (DateTime.Parse(date) <= DateTime.Now)
+            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
             {
                 Uri uri = new Uri();
                 var url = uri.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
@@ -51,7 +52,9 @@ namespace moex
 
         public string ConvertDate(DateTime date)
         {
-            return date.Year.ToString() + "-" + date.Month.ToString() + "-" + date.Day.ToString();
+            var month = date.Month.ToString().Length < 2 ? "0" + date.Month.ToString() : date.Month.ToString();
+            var day = date.Day.ToString().Length < 2 ? "0" + date.Day.ToString() : date.Day.ToString();
+            return date.Year.ToString() + "-" + month + "-" + day;
         }
     }
 }
