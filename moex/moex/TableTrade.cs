@@ -22,7 +22,7 @@ namespace moex
             foreach(var secItem in secList)
             {
                 //await Task.Run(() => StartFromFirstPage(url_init, secItem.SecId, postfix_json, postfix_from, postfix_date_init));
-                StartFromFirstPage(url_init, secItem.SecId, postfix_json, postfix_from, postfix_date_init);
+                StartFromFirstPage(url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
             }
         }
 

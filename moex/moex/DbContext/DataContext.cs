@@ -26,7 +26,7 @@ namespace moex.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Security>().HasKey("TradeDate", "SECID");
+            modelBuilder.Entity<Security>().HasKey("TRADEDATE", "SECID");
             modelBuilder.Entity<Security>().HasMany(s => s.Trades);
             modelBuilder.Entity<Trade>().HasOne(t => t.Security);
         }
