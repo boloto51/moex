@@ -18,10 +18,17 @@ namespace moex.DbContext
             connectionString = configuration.GetConnectionString("DefaultConnection").ToString();
         }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Security>().HasKey("TradeDate", "SECID");
+            modelBuilder.Entity<Security>().HasMany(s => s.Trades);
+            modelBuilder.Entity<Trade>().HasOne(t => t.Security);
         }
 
         public DbSet<Security> Securities { get; set; }
