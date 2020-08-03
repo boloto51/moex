@@ -47,7 +47,7 @@ namespace moex
 
             foreach (var item in root.history.data)
             {
-                var close = item[11] as string;
+                var close = item[11] == null ? null : item[11].ToString();
 
                 _context.Trades.Add(new Trade
                 {
