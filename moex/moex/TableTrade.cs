@@ -15,13 +15,11 @@ namespace moex
             string postfix_json = ".json";
             string postfix_from = "?from=";
             string postfix_date_init = "2015-01-01";
-            //string postfix_date_end = "2020-08-01";
 
             var secList = dataBaseGet.FromSecurityTable();
 
             foreach(var secItem in secList)
             {
-                //await Task.Run(() => StartFromFirstPage(url_init, secItem.SecId, postfix_json, postfix_from, postfix_date_init));
                 StartFromFirstPage(url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
             }
         }
@@ -29,9 +27,10 @@ namespace moex
         public async void StartFromFirstPage(string url_init, string secId, string postfix_json, string postfix_from, string postfix_date_init)
         {
             var date = postfix_date_init;
-            var dateEnd = "2015-07-31";
+            //var dateEnd = "2015-07-31";
+            var dateEnd = DateTime.Now.ToString();
 
-            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
+            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd).AddDays(-5)) <= 0)
             {
                 Uri uri = new Uri();
                 var url = uri.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
