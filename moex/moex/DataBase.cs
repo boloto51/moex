@@ -5,11 +5,18 @@ using moex.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace moex
 {
-    public class DataBasePost
+    public class DataBase
     {
+        public List<Security> FromSecurityTable()
+        {
+            DataContext context = new DataContext();
+            return context.Securities.Select(a => a).ToList();
+        }
+
         public async void ToSecurityTableAsync(Root root)
         {
             await Task.Run(() => ToSecurityTable(root));
@@ -36,12 +43,12 @@ namespace moex
             _context.SaveChanges();
         }
 
-        public async void ToTradeTableAsync(Root root)
+        public async void ToTradeTableAsync(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
         {
-            await Task.Run(() => ToTradeTable(root));
+            await Task.Run(() => ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
         }
 
-        public void ToTradeTable(Root root)
+        public void ToTradeTable(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
         {
             DataContext _context = new DataContext();
 
@@ -69,6 +76,13 @@ namespace moex
                 }
             }
             _context.SaveChanges();
+        }
+
+        public Trade FindLastDate (string secId)
+        {
+            DataContext _context = new DataContext();
+            //return _context.Trades.Where(t => t.SECID == secId).Select(t => t).Last();
+            return _context.Trades.OrderBy(t => t.TRADEDATE).Last(t => t.SECID == secId);
         }
     }
 }
