@@ -23,7 +23,8 @@ namespace moex
             //var streamReader = uri.GetStreamFromUrl(url_param);
             //var sLineTotal = uri.PageContentFromStream(streamReader);
             //return JsonSerializer.Deserialize<Root>(sLineTotal);
-            return Task.Run(() => httpService.GetAsync1<Root>(url)).Result;
+            //return Task.Run(() => httpService.GetAsync1<Root>(url)).Result;
+            return httpService.GetAsync1<Root>(url_param).Result;
         }
 
         public Root Deserialize(string url, string secId, string json, string postfix, string date)

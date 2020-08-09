@@ -10,17 +10,22 @@ namespace moex
         {
             string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
             string postfix_date_init = "2015-01-01";
-            Uri uri = new Uri();
+
             HttpService httpService = new HttpService();
+            Uri uri = new Uri(httpService);
             JsonCreator jsonCreator = new JsonCreator(uri, httpService);
             DataBase dataBase = new DataBase();
 
-            //TableSecurity tableSecurity = new TableSecurity();
-            //tableSecurity.Fill(httpService, uri, url_init);
+            TableSecurity tableSecurity = new TableSecurity(uri, httpService, jsonCreator, dataBase);
+
+            if (dataBase.FromSecurityTableCount() == 0)
+            {
+                tableSecurity.Fill(httpService, uri, url_init);
+            }
 
             TableTrade tableTrade = new TableTrade(uri, httpService, jsonCreator, dataBase);
 
-            if (tableTrade.CheckData() == false)
+            if (dataBase.FromTradeTableCount() == 0)
             {
                 tableTrade.FillAsync(url_init, postfix_date_init);
             }

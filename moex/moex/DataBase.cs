@@ -17,6 +17,18 @@ namespace moex
             return context.Securities.Select(a => a).ToList();
         }
 
+        public int FromSecurityTableCount()
+        {
+            DataContext context = new DataContext();
+            return context.Securities.Select(a => a).Count();
+        }
+
+        public int FromTradeTableCount()
+        {
+            DataContext context = new DataContext();
+            return context.Trades.Select(a => a).Count();
+        }
+
         public async void ToSecurityTableAsync(Root root)
         {
             await Task.Run(() => ToSecurityTable(root));
@@ -78,11 +90,24 @@ namespace moex
             _context.SaveChanges();
         }
 
-        public Trade FindLastDate (string secId)
+        public Trade FindLastDate(string secId)
         {
             DataContext _context = new DataContext();
             //return _context.Trades.Where(t => t.SECID == secId).Select(t => t).Last();
-            return _context.Trades.OrderBy(t => t.TRADEDATE).Last(t => t.SECID == secId);
+            return _context.Trades.Where(t => t.SECID == secId).OrderBy(t => t.TRADEDATE).Last();
+        }
+
+        public async Task<List<Trade>> FindLastTrades(List<Security> secList)
+        {
+            List<Trade> lastTradesInDB = new List<Trade>();
+
+            foreach (var secItem in secList)
+            {
+                var trade = await Task.Run(() => FindLastDate(secItem.SECID));
+                lastTradesInDB.Add(trade);
+            }
+
+            return lastTradesInDB;
         }
     }
 }

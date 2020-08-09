@@ -12,9 +12,9 @@ namespace moex
     {
         HttpService httpService;
 
-        public Uri()
+        public Uri(HttpService _httpService)
         {
-            httpService = new HttpService();
+            httpService = _httpService;
         }
         public string ConcatenateUrlStart(string url, string json, string postfix, int i = 0)
         {
@@ -40,7 +40,9 @@ namespace moex
 
         public int GetCountHundredsPages(string url)
         {
-            Root root = Task.Run(() => httpService.GetAsync1<Root>(url)).Result;
+            //Root root = await Task.Run(() => httpService.GetAsync1<Root>(url));
+            //Root root = Task.Run(() => httpService.GetAsync1<Root>(url)).Result;
+            Root root = httpService.GetAsync1<Root>(url).Result;
             return (int)Math.Truncate(Convert.ToDecimal(root.history_cursor.data[0][1] / 100));
         }
 
