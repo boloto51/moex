@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using moex.JSON_class;
 using System.Text.Json;
+using moex.JSON_class;
+using moex.Services;
 
 namespace moex
 {
@@ -20,8 +21,10 @@ namespace moex
 
         public StreamReader GetStreamFromUrl(string url)
         {
-            var httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromSeconds(30);
+            //var httpClient = new HttpClient();
+            //httpClient.Timeout = TimeSpan.FromSeconds(30);
+            //var httpGet = httpClient.GetAsync(url);
+            var httpClient = new HttpService();
             var httpGet = httpClient.GetAsync(url);
             var stream = httpGet.Result.Content.ReadAsStreamAsync();
             StreamReader objReader = new StreamReader(stream.Result);
@@ -54,10 +57,34 @@ namespace moex
 
         public DateTime GetPageLastData(StreamReader streamReader)
         {
+            //var sLineTotal = PageContentFromStream(streamReader);
+            //Root root = JsonSerializer.Deserialize<Root>(sLineTotal);
+            //var count = root.history.data.Count;
+            //return DateTime.Parse(root.history.data[count == 0 ? 0 : count - 1][1].ToString());
+            //return count > 0 ? 
+            //    DateTime.Parse(root.history.data[count][1].ToString()) :
+            //    DateTime.Parse(root.history.data[0].ToString());
+            //return count > 0 ?
+            //    DateTime.Parse(root.history.data[count][1].ToString()) : (DateTime)null;
+            Root root = GetPageLastDataRoot(streamReader);
+            int count = GetPageLastDataCount(root);
+            return DateTime.Parse(root.history.data[count - 1][1].ToString());
+        }
+
+        public Root GetPageLastDataRoot(StreamReader streamReader)
+        {
             var sLineTotal = PageContentFromStream(streamReader);
-            Root root = JsonSerializer.Deserialize<Root>(sLineTotal);
-            var count = root.history.data.Count;
-            return DateTime.Parse(root.history.data[count == 0 ? 0 : count- 1][1].ToString());
+            return JsonSerializer.Deserialize<Root>(sLineTotal);
+        }
+
+        public int GetPageLastDataCount(Root root)
+        {
+            return root.history.data.Count;
+        }
+
+        public DateTime GetPageLastData(Root root, int count)
+        {
+            return DateTime.Parse(root.history.data[count - 1][1].ToString());
         }
     }
 }

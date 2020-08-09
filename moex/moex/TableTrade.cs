@@ -30,14 +30,20 @@ namespace moex
             //var dateEnd = "2015-07-31";
             var dateEnd = DateTime.Now.ToString();
 
-            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd).AddDays(-5)) <= 0)
+            while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd).AddDays(-1)) <= 0)
             {
                 Uri uri = new Uri();
                 var url = uri.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
                 var streamReader = uri.GetStreamFromUrl(url);
-                var pageLastData = uri.GetPageLastData(streamReader);
-                await Task.Run(() => Fill(url_init, secId, postfix_json, postfix_from, date));
-                date = ConvertDate(pageLastData.AddDays(1));
+                //var pageLastData = uri.GetPageLastData(streamReader);
+                Root root = uri.GetPageLastDataRoot(streamReader);
+                int count = uri.GetPageLastDataCount(root);
+                if (count != 0)
+                {
+                    var pageLastData = uri.GetPageLastData(root, count);
+                    await Task.Run(() => Fill(url_init, secId, postfix_json, postfix_from, date));
+                    date = ConvertDate(pageLastData.AddDays(1));
+                }
             }
         }
 
