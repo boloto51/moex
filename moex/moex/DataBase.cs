@@ -20,13 +20,13 @@ namespace moex
         public int FromSecurityTableCount()
         {
             DataContext context = new DataContext();
-            return context.Securities.Select(a => a).Count();
+            return context.Securities.Count();
         }
 
         public int FromTradeTableCount()
         {
             DataContext context = new DataContext();
-            return context.Trades.Select(a => a).Count();
+            return context.Trades.Count();
         }
 
         public async void ToSecurityTableAsync(Root root)

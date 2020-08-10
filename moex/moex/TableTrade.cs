@@ -49,10 +49,11 @@ namespace moex
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
+            DateTime pageLastData = new DateTime();
 
             var date = postfix_date_init;
             //var dateEnd = "2015-07-31";
-            var dateEnd = DateTime.Now.AddDays(-1).ToString();
+            var dateEnd = ConvertDate(DateTime.Now.Date.AddDays(-1)).ToString();
 
             while (DateTime.Compare(DateTime.Parse(date), DateTime.Parse(dateEnd)) <= 0)
             {
@@ -62,13 +63,19 @@ namespace moex
 
                 if (count != 0)
                 {
-                    var pageLastData = uri.GetPageLastData(root, count);
+                    pageLastData = uri.GetPageLastData(root, count);
                     //Fill(httpService, uri, url_init, secId, postfix_json, postfix_from, date);
                     //dataBase.ToTradeTableAsync(root, url_init, secId, postfix_json, postfix_from, date);
                     //await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
                     dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
-                    date = ConvertDate(pageLastData.AddDays(1));
+                    date = ConvertDate(pageLastData.Date.AddDays(1));
                 }
+                else
+                {
+                    date = ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                }
+
+                //date = ConvertDate(pageLastData.Date.AddDays(1));
             }
         }
 
