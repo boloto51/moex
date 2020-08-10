@@ -20,10 +20,10 @@ namespace moex
             dataBase = _dataBase;
         }
 
-        public void FillAsync(string url_init, string postfix_date_init)
+        public async void FillAsync(string url_init, string postfix_date_init)
         {
-            string postfix_json = ".json";
-            string postfix_from = "?from=";
+            //string postfix_json = ".json";
+            //string postfix_from = "?from=";
 
             var secList = dataBase.FromSecurityTable();
 
@@ -31,21 +31,25 @@ namespace moex
             {
                 //StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
                 //await Task.Run(() => StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init));
-                StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
+                StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_date_init);
+                //await Task.Run(() => StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_date_init));
             }
         }
 
-        public void FillAsync(string secId, string url_init, string postfix_date_last)
+        //public void FillAsync(string secId, string url_init, string postfix_date_last)
+        //{
+        //    //string postfix_json = ".json";
+        //    //string postfix_from = "?from=";
+
+        //    //StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last);
+        //    StartFromSpecifiedPage(uri, url_init, secId, postfix_date_last);
+        //}
+
+        public void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_date_init)
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
 
-            //StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last);
-            StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last);
-        }
-
-        public void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_json, string postfix_from, string postfix_date_init)
-        {
             var date = postfix_date_init;
             //var dateEnd = "2015-07-31";
             var dateEnd = DateTime.Now.AddDays(-1).ToString();
@@ -60,7 +64,9 @@ namespace moex
                 {
                     var pageLastData = uri.GetPageLastData(root, count);
                     //Fill(httpService, uri, url_init, secId, postfix_json, postfix_from, date);
-                    dataBase.ToTradeTableAsync(root, url_init, secId, postfix_json, postfix_from, date);
+                    //dataBase.ToTradeTableAsync(root, url_init, secId, postfix_json, postfix_from, date);
+                    //await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
+                    dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
                     date = ConvertDate(pageLastData.AddDays(1));
                 }
             }
@@ -81,7 +87,7 @@ namespace moex
             return date.Year.ToString() + "-" + month + "-" + day;
         }
 
-        public async void UpdateTable(string url_init)
+        public void UpdateTable(string url_init)
         {
             //DataBase dataBaseAsync = new DataBase();
 
@@ -104,8 +110,10 @@ namespace moex
             {
                 string postfix_date_last = ConvertDate(lastTrade.TRADEDATE.Date.AddDays(1));
                 //FillAsync(lastTrade.SECID, url_init, postfix_date_last);
+                StartFromSpecifiedPage(uri, url_init, lastTrade.SECID, postfix_date_last);
                 //await Task.Run(() => FillAsync(lastTrade.SECID, url_init, postfix_date_last));
-                await Task.Run(() => FillAsync(lastTrade.SECID, url_init, postfix_date_last));
+                //await Task.Run(() => FillAsync(lastTrade.SECID, url_init, postfix_date_last));
+                //await Task.Run(() => StartFromSpecifiedPage(uri, url_init, lastTrade.SECID, postfix_date_last));
             }
         }
 

@@ -58,6 +58,7 @@ namespace moex
         public async void ToTradeTableAsync(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
         {
             await Task.Run(() => ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
+            //ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
         }
 
         public void ToTradeTable(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
@@ -66,26 +67,29 @@ namespace moex
 
             foreach (var item in root.history.data)
             {
-                var tradeDateFromUrl = item[1].ToString();
-                var secIdFromUrl = item[3].ToString();
+                //var tradeDateFromUrl = item[1].ToString();
+                //var secIdFromUrl = item[3].ToString();
 
-                var tradeDateFromDB = _context.Trades.Where(t => t.SECID == secIdFromUrl &&
-                    t.TRADEDATE.ToString() == tradeDateFromUrl)
-                    .Select(t => t.TRADEDATE).FirstOrDefault().ToString();
+                //var tradeDateFromDB = _context.Trades.Where(t => t.SECID == secIdFromUrl &&
+                //    t.TRADEDATE.ToString() == tradeDateFromUrl)
+                //    .Select(t => t.TRADEDATE).FirstOrDefault().ToString();
 
-                if (!String.IsNullOrWhiteSpace(item.ToString()) && String.IsNullOrEmpty(tradeDateFromDB))
-                {
+                //if (!String.IsNullOrWhiteSpace(item.ToString()) && String.IsNullOrEmpty(tradeDateFromDB))
+                //{
                     var close = item[11] == null ? null : item[11].ToString();
+                    var _close = String.IsNullOrWhiteSpace(close) ? (decimal?)null : Convert.ToDecimal(close.Replace(".", ","));
 
                     _context.Trades.Add(new Trade
                     {
                         TRADEDATE = DateTime.Parse(item[1].ToString()).Date,
                         SECID = item[3].ToString(),
-                        CLOSE = String.IsNullOrWhiteSpace(close) ?
-                            (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
+                        CLOSE = _close
+                        //CLOSE = String.IsNullOrWhiteSpace(close) ?
+                        //    (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
                     });
+                Console.WriteLine(DateTime.Parse(item[1].ToString()).Date + "\t" + item[3].ToString() + "\t" + _close);
 
-                }
+                //}
             }
             _context.SaveChanges();
         }
