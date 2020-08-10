@@ -4,7 +4,6 @@ using moex.JSON_class;
 using moex.Models;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace moex
@@ -58,7 +57,6 @@ namespace moex
         public async void ToTradeTableAsync(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
         {
             await Task.Run(() => ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
-            //ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
         }
 
         public void ToTradeTable(Root root, string url_init, string secId, string postfix_json, string postfix_from, string date)
@@ -88,7 +86,6 @@ namespace moex
                         //    (decimal?)null : Convert.ToDecimal(close.Replace(".", ","))
                     });
                 Console.WriteLine(DateTime.Parse(item[1].ToString()).Date + "\t" + item[3].ToString() + "\t" + _close);
-
                 //}
             }
             _context.SaveChanges();
@@ -97,7 +94,6 @@ namespace moex
         public Trade FindLastDate(string secId)
         {
             DataContext _context = new DataContext();
-            //return _context.Trades.Where(t => t.SECID == secId).Select(t => t).Last();
             return _context.Trades.Where(t => t.SECID == secId).OrderBy(t => t.TRADEDATE).Last();
         }
 

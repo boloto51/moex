@@ -12,6 +12,8 @@ namespace moex
         JsonCreator jsonCreator;
         DataBase dataBase;
 
+        public TableTrade() { }
+
         public TableTrade(Uri _uri, HttpService _httpService, JsonCreator _jsonCreator, DataBase _dataBase)
         {
             uri = _uri;

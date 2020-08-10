@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using moex.DbContext;
-using moex.Models;
 using moex.Services;
 
 namespace moex
@@ -11,7 +8,8 @@ namespace moex
         static void Main(string[] args)
         {
             string url_init = "http://iss.moex.com/iss/history/engines/stock/markets/shares/boards/tqbr/securities";
-            string postfix_date_init = "2015-01-01";
+            //string postfix_date_init = "2015-01-01";
+            string postfix_date_init = new TableTrade().ConvertDate(DateTime.Now.AddYears(-5));
 
             HttpService httpService = new HttpService();
             Uri uri = new Uri(httpService);
