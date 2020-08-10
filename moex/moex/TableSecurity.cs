@@ -1,20 +1,15 @@
-﻿using moex.Services;
+﻿using moex.JSON_class;
+using moex.Services;
 using System;
 
 namespace moex
 {
     public class TableSecurity
     {
-        Uri uri;
-        HttpService httpService;
-        JsonCreator jsonCreator;
         DataBase dataBase;
 
-        public TableSecurity(Uri _uri, HttpService _httpService, JsonCreator _jsonCreator, DataBase _dataBase)
+        public TableSecurity(DataBase _dataBase)
         {
-            uri = _uri;
-            httpService = _httpService;
-            jsonCreator = _jsonCreator;
             dataBase = _dataBase;
         }
 
@@ -28,7 +23,8 @@ namespace moex
 
             for (int i = 0; i <= countHundredsPages; i++)
             {
-                var root = jsonCreator.Deserialize(url_init, postfix_json, postfix_start, i);
+                var url_param = uri.ConcatenateUrlStart(url_init, postfix_json, postfix_start, i);
+                var root = httpService.GetAsync1<Root>(url_param).Result;
                 dataBase.ToSecurityTableAsync(root);
             }
 

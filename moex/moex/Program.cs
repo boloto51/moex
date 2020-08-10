@@ -13,17 +13,16 @@ namespace moex
 
             HttpService httpService = new HttpService();
             Uri uri = new Uri(httpService);
-            JsonCreator jsonCreator = new JsonCreator(uri, httpService);
             DataBase dataBase = new DataBase();
 
-            TableSecurity tableSecurity = new TableSecurity(uri, httpService, jsonCreator, dataBase);
+            TableSecurity tableSecurity = new TableSecurity(dataBase);
 
             if (dataBase.FromSecurityTableCount() == 0)
             {
                 tableSecurity.Fill(httpService, uri, url_init);
             }
 
-            TableTrade tableTrade = new TableTrade(uri, httpService, jsonCreator, dataBase);
+            TableTrade tableTrade = new TableTrade(uri, httpService, dataBase);
 
             if (dataBase.FromTradeTableCount() == 0)
             {
