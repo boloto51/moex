@@ -20,7 +20,7 @@ namespace moex
             dataBase = _dataBase;
         }
 
-        public async void FillAsync(string url_init, string postfix_date_init)
+        public void Fill(string url_init, string postfix_date_init)
         {
             //string postfix_json = ".json";
             //string postfix_from = "?from=";
@@ -45,11 +45,11 @@ namespace moex
         //    StartFromSpecifiedPage(uri, url_init, secId, postfix_date_last);
         //}
 
-        public void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_date_init)
+        public async void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_date_init)
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
-            DateTime pageLastData = new DateTime();
+            //DateTime pageLastData = new DateTime();
 
             var date = postfix_date_init;
             //var dateEnd = "2015-07-31";
@@ -63,19 +63,17 @@ namespace moex
 
                 if (count != 0)
                 {
-                    pageLastData = uri.GetPageLastData(root, count);
+                    var pageLastData = uri.GetPageLastData(root, count);
                     //Fill(httpService, uri, url_init, secId, postfix_json, postfix_from, date);
                     //dataBase.ToTradeTableAsync(root, url_init, secId, postfix_json, postfix_from, date);
-                    //await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
-                    dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
+                    await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
+                    //dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date);
                     date = ConvertDate(pageLastData.Date.AddDays(1));
                 }
                 else
                 {
                     date = ConvertDate(DateTime.Parse(date).Date.AddDays(1));
                 }
-
-                //date = ConvertDate(pageLastData.Date.AddDays(1));
             }
         }
 

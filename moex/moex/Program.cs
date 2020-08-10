@@ -29,7 +29,7 @@ namespace moex
 
             if (dataBase.FromTradeTableCount() == 0)
             {
-                tableTrade.FillAsync(url_init, postfix_date_init);
+                tableTrade.Fill(url_init, postfix_date_init);
             }
             else
             {
