@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using moex.DbContext;
+using moex.Models;
 using moex.Services;
 
 namespace moex

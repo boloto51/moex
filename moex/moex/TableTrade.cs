@@ -20,7 +20,7 @@ namespace moex
             dataBase = _dataBase;
         }
 
-        public async void FillAsync(string url_init, string postfix_date_init)
+        public void FillAsync(string url_init, string postfix_date_init)
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
@@ -30,17 +30,18 @@ namespace moex
             foreach (var secItem in secList)
             {
                 //StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
-                await Task.Run(() => StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init));
+                //await Task.Run(() => StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init));
+                StartFromSpecifiedPage(uri, url_init, secItem.SECID, postfix_json, postfix_from, postfix_date_init);
             }
         }
 
-        public async void FillAsync(string secId, string url_init, string postfix_date_last)
+        public void FillAsync(string secId, string url_init, string postfix_date_last)
         {
             string postfix_json = ".json";
             string postfix_from = "?from=";
 
             //StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last);
-            await Task.Run(() => StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last));
+            StartFromSpecifiedPage(uri, url_init, secId, postfix_json, postfix_from, postfix_date_last);
         }
 
         public void StartFromSpecifiedPage(Uri uri, string url_init, string secId, string postfix_json, string postfix_from, string postfix_date_init)
@@ -84,7 +85,7 @@ namespace moex
         {
             //DataBase dataBaseAsync = new DataBase();
 
-            var secList = dataBase.FromSecurityTable();
+            //var secList = dataBase.FromSecurityTable();
             //List<Trade> lastTradesInDB = new List<Trade>();
 
             //foreach (var secItem in secList)
@@ -97,12 +98,13 @@ namespace moex
             //    lastTradesInDB.Add(trade);
             //}
 
-            var lastTradesInDB = dataBase.FindLastTrades(secList).Result;
+            var lastTradesInDB = dataBase.FindLastTrades();
 
             foreach (var lastTrade in lastTradesInDB)
             {
                 string postfix_date_last = ConvertDate(lastTrade.TRADEDATE.Date.AddDays(1));
                 //FillAsync(lastTrade.SECID, url_init, postfix_date_last);
+                //await Task.Run(() => FillAsync(lastTrade.SECID, url_init, postfix_date_last));
                 await Task.Run(() => FillAsync(lastTrade.SECID, url_init, postfix_date_last));
             }
         }

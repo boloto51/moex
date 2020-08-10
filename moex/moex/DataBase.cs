@@ -109,5 +109,17 @@ namespace moex
 
             return lastTradesInDB;
         }
+
+        public List<Trade> FindLastTrades()
+        {
+            DataContext _context = new DataContext();
+            return _context.Trades.ToList().GroupBy(t => t.SECID)
+                        .Select(g => new Trade()
+                        {
+                            SECID = g.Key,
+                            TRADEDATE = g.Select(t => t.TRADEDATE).LastOrDefault(),
+                            CLOSE = g.Select(t => t.CLOSE).LastOrDefault()
+                        }).ToList();
+        }
     }
 }
