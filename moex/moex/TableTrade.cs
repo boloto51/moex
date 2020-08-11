@@ -42,13 +42,21 @@ namespace moex
             {
                 var url = uri.ConcatenateUrlFrom(url_init, secId, postfix_json, postfix_from, date);
                 Root root = httpService.GetAsync1<Root>(url).Result;
-                int count = uri.GetPageLastDataCount(root);
 
-                if (count != 0)
+                if (root != null)
                 {
-                    var pageLastData = uri.GetPageLastData(root, count);
-                    await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
-                    date = ConvertDate(pageLastData.Date.AddDays(1));
+                    int count = uri.GetPageLastDataCount(root);
+
+                    if (count != 0)
+                    {
+                        var pageLastData = uri.GetPageLastData(root, count);
+                        await Task.Run(() => dataBase.ToTradeTable(root, url_init, secId, postfix_json, postfix_from, date));
+                        date = ConvertDate(pageLastData.Date.AddDays(1));
+                    }
+                    else
+                    {
+                        date = ConvertDate(DateTime.Parse(date).Date.AddDays(1));
+                    }
                 }
                 else
                 {

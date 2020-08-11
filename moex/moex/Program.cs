@@ -32,6 +32,8 @@ namespace moex
             {
                 tableTrade.UpdateTable(url_init);
             }
+
+            dataBase.DeleteOldTrades(postfix_date_init);
         }
     }
 }

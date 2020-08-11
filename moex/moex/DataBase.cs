@@ -121,5 +121,18 @@ namespace moex
                             CLOSE = g.Select(t => t.CLOSE).LastOrDefault()
                         }).ToList();
         }
+
+        public void DeleteOldTrades(string oldDate)
+        {
+            DataContext _context = new DataContext();
+            var trades = _context.Trades.Where(t => DateTime.Compare(t.TRADEDATE, DateTime.Parse(oldDate)) < 0).ToList();
+            
+            foreach(var trade in trades)
+            {
+                _context.Trades.Remove(trade);
+            }
+
+            _context.SaveChanges();
+        }
     }
 }
